@@ -210,7 +210,9 @@ class PhoneModem:  # pylint: disable=too-many-instance-attributes
                     self.cid_number = ""
                     self.cid_time = datetime.now()
 
-                await self._set_state(self.STATE_RING)
+                if not self.cid_number:
+                    await self._set_state(self.STATE_RING)
+
                 self.incomingcallnotificationfunc(self.state)
                 read_timeout = READ_RING_TIMEOUT
                 continue
