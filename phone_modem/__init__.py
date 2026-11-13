@@ -228,6 +228,8 @@ class PhoneModem:  # pylint: disable=too-many-instance-attributes
 
             if cid_field == "NMBR":
                 self.cid_number = cid_data
+                await self._set_state(self.STATE_CALLERID)
+                self.incomingcallnotificationfunc(self.state)
                 continue
 
             if cid_field == "NAME":
